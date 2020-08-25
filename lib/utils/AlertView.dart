@@ -1,12 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/root/home/shop_detail_entity.dart';
+import 'package:shop/root/home/model/shop_detail_bean_entity.dart';
 
 import 'AppConfig.dart';
 
 class AlertView extends StatefulWidget {
  var onTap;
- ShopDetailEntity entity;
+ ShopDetailBeanEntity entity;
   AlertView({
     Key key,
     this.onTap,
@@ -21,10 +23,16 @@ class AlertView extends StatefulWidget {
 }
 
 class _AlertViewState extends State<AlertView> {
-  bool isBig;
-
+  bool isBig;  Map<String, dynamic> map;
+List cai =new List();
   @override
   void initState() {
+
+     map = json.decode(widget.entity.data.setmeal[0].configjson);
+     map.forEach((key, value) {
+
+       cai.add({"key":key,"value":value});
+     });
     // TODO: implement initState
     super.initState();
   }
@@ -260,7 +268,7 @@ class _AlertViewState extends State<AlertView> {
           width: double.infinity,
 //                        color: Colors.blue,
           child: Text(
-            "${widget.entity.data.setmeal[index].statusText}",
+            "${widget.entity.data.setmeal[index].name}",
             style: TextStyle(
                 fontSize: AppConfig.logic_width(
                   30,
@@ -273,29 +281,36 @@ class _AlertViewState extends State<AlertView> {
 
           width: double.infinity,
 //                        color: Colors.blue,
-          child:Row(children: [
-            Text(
-              "${widget.entity.data.setmeal[index].name}",
-              style: TextStyle(
-                  fontSize: AppConfig.logic_fontSize(
-                    25,
-                  ),
-                  color: Colors.black),
-            ),
-            Expanded(child: Container()),
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+          child:ListView.builder(itemBuilder: ((context,index){
+            return Container(child:
+            Row(children: [
+              Text(
+                "${cai[index].key}",
+                style: TextStyle(
+                    fontSize: AppConfig.logic_fontSize(
+                      25,
+                    ),
+                    color: Colors.black),
+              ),
+              Expanded(child: Container()),
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
 
-              child:  Text(
-              "￥${widget.entity.data.setmeal[index].price}",
-              style: TextStyle(
-                  fontSize: AppConfig.logic_width(
-                    25,
-                  ),
-                  color: Colors.black),
-            ) ,)
+                child:  Text(
+//                  "￥${cai.values}",
+                "",
+                  style: TextStyle(
+                      fontSize: AppConfig.logic_width(
+                        25,
+                      ),
+                      color: Colors.black),
+                ) ,)
 
-          ],),
+            ],)
+              ,);
+          }))
+
+
         ),
       ],
     );

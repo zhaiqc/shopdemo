@@ -1,20 +1,19 @@
 import 'package:shop/generated/json/base/json_convert_content.dart';
 import 'package:shop/generated/json/base/json_filed.dart';
 
-class BannerEntity with JsonConvert<BannerEntity> {
+class BannerBeanEntity with JsonConvert<BannerBeanEntity> {
 	int code;
 	String msg;
 	String time;
-	List<BannerData> data;
+	List<BannerBeanData> data;
 }
 
-class BannerData with JsonConvert<BannerData> {
+class BannerBeanData with JsonConvert<BannerBeanData> {
 	int id;
 	String title;
 	@JSONField(name: "jump_address")
 	String jumpAddress;
-	@JSONField(name: "img_url")
-	String imgUrl;
+	String image;
 	int createtime;
 	int updatetime;
 	String status;

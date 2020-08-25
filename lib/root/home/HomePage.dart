@@ -4,7 +4,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:shop/root/detail/DetailPage.dart';
 import 'package:shop/root/home/HomeViewModel.dart';
-import 'package:shop/root/home/shop_detail_entity.dart';
 import 'package:shop/root/home/shop_entity.dart';
 import 'package:shop/root/home/shopx_entity.dart';
 import 'package:shop/utils/AlertView.dart';
@@ -18,8 +17,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_2d_amap/flutter_2d_amap.dart';
 
-import 'banner_entity.dart';
-import 'category_entity.dart';
+import '../shop_list/ShopListPage.dart';
+import 'model/banner_bean_entity.dart';
+import 'model/category_bean_entity.dart';
+import 'model/shop_detail_bean_entity.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   ScrollController _controller = new ScrollController();
   AMap2DController _aMap2DController;
   HomeViewModel _viewModel;
-  CategoryEntity _entity;
+  CategoryBeanEntity _entity;
   int shopPage =1;
   int limit =6;
 
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   return SliverGrid(
                     delegate: new SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        return _selectSortViewCell(snapshot.data, index);
+                        return Container();
                       },
                       childCount: 0,
                     ),
@@ -352,13 +353,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget header(BannerEntity banner) {
+  Widget header(BannerBeanEntity banner) {
     return Container(
       height: AppConfig.logic_width(350.0),
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
           return new Image.network(
-            banner.data[index].imgUrl,
+            banner.data[index].image,
             fit: BoxFit.fill,
           );
         },
@@ -370,7 +371,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget shops(CategoryEntity entity,int index) {
+  Widget shops(CategoryBeanEntity entity,int index) {
     return new Container(
       child: new Column(
         children: <Widget>[
@@ -405,6 +406,8 @@ class _HomePageState extends State<HomePage> {
                   child: new GestureDetector(
                     onTap: () {
                       ///分类点击事件
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (_) => new ShopListPage(entity.data[index].id)));
                     },
                     child: new Row(
                       children: <Widget>[
@@ -665,7 +668,7 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-  void show(ShopDetailEntity entity){
+  void show(ShopDetailBeanEntity entity){
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -680,14 +683,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   //分类模块
-  Widget _selectSortViewCell(CategoryEntity entity, int index) {
+  Widget _selectSortViewCell(CategoryBeanEntity entity, int index) {
 
     return new Container(
       alignment: Alignment.center,
       child: new Material(
         color: AppConfig.color_null,
         child: new InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (_) => new ShopListPage(entity.data[index].id)));
+
+            },
             child: new Column(
               children: <Widget>[
                 new Expanded(child: new Container()),

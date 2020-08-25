@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shop/root/home/category_entity.dart';
-import 'package:shop/root/home/shop_detail_entity.dart';
 import 'package:shop/root/home/shop_entity.dart';
 import 'package:shop/root/home/shopx_entity.dart';
 import 'package:shop/utils/HttpUtils.dart';
 import 'package:shop/utils/view_model/BaseViewModel.dart';
 
-import 'banner_entity.dart';
+import 'model/banner_bean_entity.dart';
+import 'model/category_bean_entity.dart';
+import 'model/shop_detail_bean_entity.dart';
 
 class HomeViewModel extends BaseViewModel {
 
@@ -27,9 +27,9 @@ class HomeViewModel extends BaseViewModel {
   }
 
 
-  Future<BannerEntity> getBanner()async{
+  Future<BannerBeanEntity> getBanner()async{
     Response  res=await  HttpUtils().sendData(url: "common/banner");
-    BannerEntity entity = BannerEntity().fromJson(res.data);
+    BannerBeanEntity entity = BannerBeanEntity().fromJson(res.data);
     print("getBanner ${res}");
 
     return Future(()=>entity);
@@ -37,12 +37,12 @@ class HomeViewModel extends BaseViewModel {
   }
 
 
-  Future<CategoryEntity> getCategory()async{
+  Future<CategoryBeanEntity> getCategory()async{
 
     Response  res=await  HttpUtils().sendData(url: "common/category");
     print("getCategory ${res}");
 
-    CategoryEntity entity = CategoryEntity().fromJson(res.data);
+    CategoryBeanEntity entity = CategoryBeanEntity().fromJson(res.data);
     return Future(()=>entity);
 
   }
@@ -55,12 +55,12 @@ class HomeViewModel extends BaseViewModel {
     return Future(()=>entity);
 
   }
-  Future<ShopDetailEntity> getShop({int shoplist_id})async{
+  Future<ShopDetailBeanEntity> getShop({int shoplist_id})async{
     print("shoplist_id ${shoplist_id}");
     FormData formData = new FormData.fromMap({"shoplist_id": 1});
     Response  res=await  HttpUtils().sendData(url: "index/getShop",data: formData);
     print("getShop ${res}");
-    ShopDetailEntity entity = ShopDetailEntity().fromJson(res.data);
+    ShopDetailBeanEntity entity = ShopDetailBeanEntity().fromJson(res.data);
     return Future(()=>entity);
 
   }

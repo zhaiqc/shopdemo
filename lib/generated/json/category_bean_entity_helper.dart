@@ -1,6 +1,6 @@
-import 'package:shop/root/home/category_entity.dart';
+import 'package:shop/root/home/model/category_bean_entity.dart';
 
-categoryEntityFromJson(CategoryEntity data, Map<String, dynamic> json) {
+categoryBeanEntityFromJson(CategoryBeanEntity data, Map<String, dynamic> json) {
 	if (json['code'] != null) {
 		data.code = json['code']?.toInt();
 	}
@@ -11,15 +11,15 @@ categoryEntityFromJson(CategoryEntity data, Map<String, dynamic> json) {
 		data.time = json['time']?.toString();
 	}
 	if (json['data'] != null) {
-		data.data = new List<CategoryData>();
+		data.data = new List<CategoryBeanData>();
 		(json['data'] as List).forEach((v) {
-			data.data.add(new CategoryData().fromJson(v));
+			data.data.add(new CategoryBeanData().fromJson(v));
 		});
 	}
 	return data;
 }
 
-Map<String, dynamic> categoryEntityToJson(CategoryEntity entity) {
+Map<String, dynamic> categoryBeanEntityToJson(CategoryBeanEntity entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['code'] = entity.code;
 	data['msg'] = entity.msg;
@@ -30,7 +30,7 @@ Map<String, dynamic> categoryEntityToJson(CategoryEntity entity) {
 	return data;
 }
 
-categoryDataFromJson(CategoryData data, Map<String, dynamic> json) {
+categoryBeanDataFromJson(CategoryBeanData data, Map<String, dynamic> json) {
 	if (json['id'] != null) {
 		data.id = json['id']?.toInt();
 	}
@@ -58,7 +58,7 @@ categoryDataFromJson(CategoryData data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> categoryDataToJson(CategoryData entity) {
+Map<String, dynamic> categoryBeanDataToJson(CategoryBeanData entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['id'] = entity.id;
 	data['pid'] = entity.pid;

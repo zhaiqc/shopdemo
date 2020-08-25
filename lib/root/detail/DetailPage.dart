@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:shop/root/home/shop_detail_entity.dart';
+import 'package:shop/root/home/model/shop_detail_bean_entity.dart';
 import 'package:shop/utils/AppConfig.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 class DetailPage extends StatefulWidget {
-  ShopDetailEntity  entity;
+  ShopDetailBeanEntity  entity;
 
   DetailPage(this.entity);
 
@@ -939,7 +939,7 @@ List<Widget> tags =new List();
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
                 child: Text(
-                  "￥${widget.entity.data.setmeal[index].price}",
+                  "￥${widget.entity.data.setmeal[index].configjson}",
                   style: TextStyle(
                       fontSize: AppConfig.logic_width(
                         25,

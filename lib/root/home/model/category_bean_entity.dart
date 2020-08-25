@@ -1,14 +1,14 @@
 import 'package:shop/generated/json/base/json_convert_content.dart';
 import 'package:shop/generated/json/base/json_filed.dart';
 
-class CategoryEntity with JsonConvert<CategoryEntity> {
+class CategoryBeanEntity with JsonConvert<CategoryBeanEntity> {
 	int code;
 	String msg;
 	String time;
-	List<CategoryData> data;
+	List<CategoryBeanData> data;
 }
 
-class CategoryData with JsonConvert<CategoryData> {
+class CategoryBeanData with JsonConvert<CategoryBeanData> {
 	int id;
 	int pid;
 	String type;

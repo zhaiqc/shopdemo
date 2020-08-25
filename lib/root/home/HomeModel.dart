@@ -1,6 +1,6 @@
-import 'package:shop/root/home/banner_entity.dart';
+import 'package:shop/root/home/model/banner_bean_entity.dart';
 
 class HomeModel{
-  BannerEntity _bannerEntity;
+  BannerBeanEntity _bannerEntity;
 
 }

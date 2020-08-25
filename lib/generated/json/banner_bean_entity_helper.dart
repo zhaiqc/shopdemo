@@ -1,6 +1,6 @@
-import 'package:shop/root/home/banner_entity.dart';
+import 'package:shop/root/home/model/banner_bean_entity.dart';
 
-bannerEntityFromJson(BannerEntity data, Map<String, dynamic> json) {
+bannerBeanEntityFromJson(BannerBeanEntity data, Map<String, dynamic> json) {
 	if (json['code'] != null) {
 		data.code = json['code']?.toInt();
 	}
@@ -11,15 +11,15 @@ bannerEntityFromJson(BannerEntity data, Map<String, dynamic> json) {
 		data.time = json['time']?.toString();
 	}
 	if (json['data'] != null) {
-		data.data = new List<BannerData>();
+		data.data = new List<BannerBeanData>();
 		(json['data'] as List).forEach((v) {
-			data.data.add(new BannerData().fromJson(v));
+			data.data.add(new BannerBeanData().fromJson(v));
 		});
 	}
 	return data;
 }
 
-Map<String, dynamic> bannerEntityToJson(BannerEntity entity) {
+Map<String, dynamic> bannerBeanEntityToJson(BannerBeanEntity entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['code'] = entity.code;
 	data['msg'] = entity.msg;
@@ -30,7 +30,7 @@ Map<String, dynamic> bannerEntityToJson(BannerEntity entity) {
 	return data;
 }
 
-bannerDataFromJson(BannerData data, Map<String, dynamic> json) {
+bannerBeanDataFromJson(BannerBeanData data, Map<String, dynamic> json) {
 	if (json['id'] != null) {
 		data.id = json['id']?.toInt();
 	}
@@ -40,8 +40,8 @@ bannerDataFromJson(BannerData data, Map<String, dynamic> json) {
 	if (json['jump_address'] != null) {
 		data.jumpAddress = json['jump_address']?.toString();
 	}
-	if (json['img_url'] != null) {
-		data.imgUrl = json['img_url']?.toString();
+	if (json['image'] != null) {
+		data.image = json['image']?.toString();
 	}
 	if (json['createtime'] != null) {
 		data.createtime = json['createtime']?.toInt();
@@ -58,12 +58,12 @@ bannerDataFromJson(BannerData data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> bannerDataToJson(BannerData entity) {
+Map<String, dynamic> bannerBeanDataToJson(BannerBeanData entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['id'] = entity.id;
 	data['title'] = entity.title;
 	data['jump_address'] = entity.jumpAddress;
-	data['img_url'] = entity.imgUrl;
+	data['image'] = entity.image;
 	data['createtime'] = entity.createtime;
 	data['updatetime'] = entity.updatetime;
 	data['status'] = entity.status;

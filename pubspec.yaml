@@ -44,7 +44,7 @@ dependencies:
   chewie: ^0.9.10
   rich_edit: ^0.1.1
   file_picker_web: any
-  pull_to_refresh: ^1.6.1
+  flutter_easyrefresh: ^2.1.5
 
   video_player: ^0.10.12
 

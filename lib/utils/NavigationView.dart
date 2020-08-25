@@ -10,6 +10,6 @@ class NavigationView{
     TickerProvider vsync
   }):
         item = new BottomNavigationBarItem(icon: new Icon(icon), title: new Text(title)),
-        controller = new AnimationController(vsync: vsync,duration: kThemeAnimationDuration);
+        controller = new AnimationController(duration: kThemeAnimationDuration,vsync: vsync);
 
 }
