@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker_web/file_picker_web.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences_web/shared_preferences_web.dart';
+import 'package:shop/root/User.dart';
 import 'package:shop/root/home/HomePage.dart';
 import 'package:shop/root/my/MyPage.dart';
 import 'package:shop/root/vip/VipPage.dart';
@@ -14,6 +18,7 @@ import 'package:shop/utils/provider/ViewModelProvider.dart';
 import '../utils/AppConfig.dart';
 import 'article/ArticlePage.dart';
 import 'home/HomeViewModel.dart';
+import 'login/model/login_entity.dart';
 
 class RootPage extends StatefulWidget {
   int currentIndex;
@@ -39,7 +44,18 @@ class _RootPageState extends State<RootPage>with TickerProviderStateMixin {
   @override
   void initState() {
 
-  // TODO: implement initState
+    SharedPreferences.getInstance().then((prefs) {
+      String use =prefs.getString("user");
+      if(use!=null){
+        new User().entity=LoginEntity().fromJson(jsonDecode(use));
+      }
+      print(new User().entity.data.userinfo.username);
+
+    });
+
+
+
+    // TODO: implement initState
     super.initState();
   }
   void _rebuild() {

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:shop/root/home/model/shop_bean_entity.dart';
+import 'package:shop/root/home/model/shop_detail_entity.dart';
 import 'package:shop/root/home/shopx_entity.dart';
 import 'package:shop/root/shop_list/view/ShopListView.dart';
 import 'package:shop/utils/HttpUtils.dart';
@@ -25,12 +25,12 @@ class ShopListViewModel{
     }
   }
 
-  Future<ShopBeanEntity> getShop({int shoplist_id})async{
+  Future<ShopDetailEntity> getShop({int shoplist_id})async{
     print("shoplist_id ${shoplist_id}");
-    FormData formData = new FormData.fromMap({"shoplist_id": 1});
+    FormData formData = new FormData.fromMap({"shoplist_id": shoplist_id});
     Response  res=await  HttpUtils().sendData(url: "index/getShop",data: formData);
     print("getShop ${res}");
-    ShopBeanEntity entity = ShopBeanEntity().fromJson(res.data);
+    ShopDetailEntity entity = ShopDetailEntity().fromJson(res.data);
     return Future(()=>entity);
 
   }

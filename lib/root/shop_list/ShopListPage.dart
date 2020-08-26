@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:shop/root/home/model/shop_bean_entity.dart';
+import 'package:shop/root/home/model/shop_detail_entity.dart';
 import 'package:shop/root/home/shopx_entity.dart';
 import 'package:shop/root/shop_list/view/ShopListView.dart';
 import 'package:shop/root/shop_list/view_model/ShopListViewModel.dart';
@@ -129,6 +129,8 @@ class _ShopListPageState extends State<ShopListPage> implements ShopListView {
                                       data.title,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+
                                           fontSize: AppConfig.logic_width(30)),
                                     ),
                                     width: double.infinity,
@@ -290,7 +292,7 @@ class _ShopListPageState extends State<ShopListPage> implements ShopListView {
           },
         ));
   }
-  void show(ShopBeanEntity entity){
+  void show(ShopDetailEntity entity){
     showDialog(
       context: context,
       barrierDismissible: true,

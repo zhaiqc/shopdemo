@@ -3,29 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:shop/root/login/view/LoginView.dart';
 import 'package:shop/root/login/view_model/LoginViewModel.dart';
 import 'package:shop/utils/AppConfig.dart';
-import 'package:shop/utils/Dimens.dart';
 import 'package:shop/utils/text_field.dart';
 import 'package:toast/toast.dart';
 
-import '../RootPage.dart';
-import 'RegPage.dart';
+import 'LoginPage.dart';
 
-class LoginPage extends StatefulWidget {
+class RegPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegPageState createState() => _RegPageState();
 }
 
-class _LoginPageState extends State<LoginPage> implements LoginView {
+class _RegPageState extends State<RegPage>implements LoginView {
   final FocusNode _phoneFN = FocusNode();
+  final FocusNode _passFN = FocusNode();
+  final FocusNode _ipassFN = FocusNode();
   final FocusNode _codeFN = FocusNode();
   LoginViewModel _viewModel;
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _codeController = TextEditingController();
+  TextEditingController _passController = TextEditingController();
+  TextEditingController _ipassController = TextEditingController();
   TimerController timerController =new TimerController(time: 0,second: 30);
-@override
+  @override
   void initState() {
-  _viewModel =LoginViewModel(this);
-  // TODO: implement initState
+    _viewModel =LoginViewModel(this);
+    // TODO: implement initState
     super.initState();
   }
   @override
@@ -34,7 +35,8 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
       children: [
         logo(),
         user_name(),
-        code(),
+        password(),
+        ipassword(),
         button(),
 //        build_reg()
       ],
@@ -48,79 +50,118 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
 
   Widget user_name(){
     return Container(height: AppConfig.logic_height(100),width:AppConfig.logic_width(700),
-    child: MyTextField(
-      controller: _phoneController,
-      focusNode: _phoneFN,
-      maxLength: 20,
-      keyboardType: TextInputType.phone,
-      style: AppConfig.normalTextStyle(
-         Colors.black, AppConfig.logic_fontSize(30)),
-      hintText: "请输入手机号",
-      hintStyle: AppConfig.normalTextStyle(
-          Colors.black54, AppConfig.logic_fontSize(25)),
-
-      isBorder: true,
-
-    ),
-    );
-
-  }
-  Widget code(){
-    return Container(height: AppConfig.logic_height(100),width:AppConfig.logic_width(700),
       child: MyTextField(
-        controller: _codeController,
-        focusNode: _codeFN,
-        maxLength: 6,
+        controller: _phoneController,
+        focusNode: _phoneFN,
+        maxLength: 20,
+        keyboardType: TextInputType.text,
         style: AppConfig.normalTextStyle(
             Colors.black, AppConfig.logic_fontSize(30)),
-        hintText: "请输入验证码",
-        keyboardType: TextInputType.emailAddress,
+        hintText: "请输入账号",
         hintStyle: AppConfig.normalTextStyle(
             Colors.black54, AppConfig.logic_fontSize(25)),
-        isBorder: true,
-        timerController: timerController,
 
-        getVCode: (){
-//          LogUtils.show(filter: "phonenum",msg: phoneCode+_phoneController.text);
-          _viewModel.sendCode(phoneNum:_phoneController.text );
-////                    timerController.startTimer();
-//          showDialog(context:context,builder: (context){
-//            con =context;
-//            return new LoadingDialog("请稍后...");
-//          });
-        },
+        isBorder: true,
+
       ),
     );
+
   }
+  Widget password(){
+    return Container(height: AppConfig.logic_height(100),width:AppConfig.logic_width(700),
+      child: MyTextField(
+        controller: _passController,
+        focusNode: _passFN,
+        maxLength: 20,
+        keyboardType: TextInputType.text,
+        style: AppConfig.normalTextStyle(
+            Colors.black, AppConfig.logic_fontSize(30)),
+        hintText: "请输入密码",
+        hintStyle: AppConfig.normalTextStyle(
+            Colors.black54, AppConfig.logic_fontSize(25)),
+
+        isBorder: true,
+
+      ),
+    );
+
+  }
+  Widget ipassword(){
+    return Container(height: AppConfig.logic_height(100),width:AppConfig.logic_width(700),
+      child: MyTextField(
+        controller: _ipassController,
+        focusNode: _ipassFN,
+        maxLength: 20,
+        keyboardType: TextInputType.text,
+        style: AppConfig.normalTextStyle(
+            Colors.black, AppConfig.logic_fontSize(30)),
+        hintText: "请再次输入密码",
+        hintStyle: AppConfig.normalTextStyle(
+            Colors.black54, AppConfig.logic_fontSize(25)),
+
+        isBorder: true,
+
+      ),
+    );
+
+  }
+//  Widget code(){
+//    return Container(height: AppConfig.logic_height(100),width:AppConfig.logic_width(700),
+//      child: MyTextField(
+//        controller: _codeController,
+//        focusNode: _codeFN,
+//        maxLength: 6,
+//        style: AppConfig.normalTextStyle(
+//            Colors.black, AppConfig.logic_fontSize(30)),
+//        hintText: "请输入验证码",
+//        keyboardType: TextInputType.emailAddress,
+//        hintStyle: AppConfig.normalTextStyle(
+//            Colors.black54, AppConfig.logic_fontSize(25)),
+//        isBorder: true,
+//        timerController: timerController,
+//
+//        getVCode: (){
+////          LogUtils.show(filter: "phonenum",msg: phoneCode+_phoneController.text);
+//          _viewModel.sendCode(phoneNum:_phoneController.text );
+//////                    timerController.startTimer();
+////          showDialog(context:context,builder: (context){
+////            con =context;
+////            return new LoadingDialog("请稍后...");
+////          });
+//        },
+//      ),
+//    );
+//  }
   Widget button(){
     return Container(
       margin: EdgeInsets.only(top: AppConfig.logic_width(50)),
       height: AppConfig.logic_height(80),width:AppConfig.logic_width(700),
-    child:FlatButton(
-      onPressed: (){
-        _viewModel.login(phoneNum: _phoneController.text,code: _codeController.text);
-      },
-      textColor: Colors.white,
-      color: Colors.red,
-      disabledColor: Colors.red.withOpacity(0.6),
-      disabledTextColor: Colors.red.withOpacity(0.8),
-      child:  Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
+      child:FlatButton(
+        onPressed: (){
+
+
+        },
+        textColor: Colors.white,
+        color: Colors.red,
+        disabledColor: Colors.red.withOpacity(0.6),
+        disabledTextColor: Colors.red.withOpacity(0.8),
+        child:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
 
 //            height: 48.0,
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: Text(
-              "立即登陆",
-              style: TextStyle(fontSize: AppConfig.logic_fontSize(30)),
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Text(
+                "立即注册",
+                style: TextStyle(fontSize: AppConfig.logic_fontSize(30)),
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
 
-    ) ,
+      ) ,
     );
   }
 
@@ -129,35 +170,32 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
       height: AppConfig.logic_height(80),width:AppConfig.logic_width(700),
 
       child: Row(children: [
-      Expanded(child: Container(child: InkWell(child: Text("密码注册",style: TextStyle(color: Colors.red),),onTap: (){
-        Navigator.push(context, new MaterialPageRoute(builder: (_) => new RegPage()));
+        Expanded(child: Container(child: InkWell(child: Text("密码注册",style: TextStyle(color: Colors.red),),onTap: (){
+          Navigator.push(context, new MaterialPageRoute(builder: (_) => new LoginPage()));
 
-      },),)),
+        },),)),
 
-      Expanded(child: Container()),
+        Expanded(child: Container()),
         Expanded(child: Container(child: InkWell(child: Text("密码登录",textAlign: TextAlign.right,style: TextStyle(color: Colors.red)),),)),
 
-    ],),);
+      ],),);
   }
 
   @override
   void error(msg) {
-  Toast.show(msg, context);
+    Toast.show(msg, context);
     // TODO: implement error
   }
 
   @override
   void sendCodeSuccess(msg) {
     Toast.show(msg, context);
-timerController.startTimer();
+    timerController.startTimer();
     // TODO: implement sendCodeSuccess
   }
 
   @override
   void loginSuccess(msg) {
-    Toast.show(msg, context);
-    Navigator.pushReplacement(context, new MaterialPageRoute(builder: (_) => new RootPage(0)));
-
     // TODO: implement loginSuccess
   }
 }

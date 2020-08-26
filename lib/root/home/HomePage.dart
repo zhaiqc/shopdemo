@@ -19,7 +19,7 @@ import 'package:flutter_2d_amap/flutter_2d_amap.dart';
 import '../shop_list/ShopListPage.dart';
 import 'model/banner_bean_entity.dart';
 import 'model/category_bean_entity.dart';
-import 'model/shop_bean_entity.dart';
+import 'model/shop_detail_entity.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -446,7 +446,7 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: ((BuildContext context, int index) {
             return shopItem(snapshot.data.data[index]);
           }),
-          itemCount: 1,
+          itemCount: snapshot.data.data.length,
 //                children: shopItem(new AllModel().homePageModel.videosList[index].length, index),
         ),
       );
@@ -504,6 +504,8 @@ class _HomePageState extends State<HomePage> {
                               data.title,
                               textAlign: TextAlign.left,
                               style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+
                                   fontSize: AppConfig.logic_width(30)),
                             ),
                             width: double.infinity,
@@ -529,10 +531,12 @@ class _HomePageState extends State<HomePage> {
                                     alignment: Alignment.center,
                                     child: Text("${data.manystoretapsText[index].name}",
                                       textAlign: TextAlign.right,
+
                                       style: TextStyle(
                                           color: Colors.red,
+
                                           fontSize:
-                                          AppConfig.logic_fontSize(18)),
+                                          AppConfig.logic_fontSize(18),),
                                     ),
                                     decoration: new BoxDecoration(
                                       borderRadius: BorderRadius.all(
@@ -667,7 +671,7 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-  void show(ShopBeanEntity entity){
+  void show(ShopDetailEntity entity){
     print(entity.data.originalPrice);
     showDialog(
       context: context,

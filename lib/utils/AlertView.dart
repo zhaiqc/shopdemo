@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/root/home/model/shop_bean_entity.dart';
+import 'package:shop/root/home/model/shop_detail_entity.dart';
 import 'AppConfig.dart';
 
 class AlertView extends StatefulWidget {
  var onTap;
- ShopBeanEntity entity;
+ ShopDetailEntity entity;
   AlertView({
     Key key,
     this.onTap,
@@ -288,7 +288,7 @@ class _AlertViewState extends State<AlertView> {
               child:
             Row(children: [
               Text(
-                widget.entity.data.setmeal[index].configjson[i][0],
+                widget.entity.data.setmeal[index].configjson[i].name,
                 style: TextStyle(
                     fontSize: AppConfig.logic_fontSize(
                       25,
@@ -300,7 +300,7 @@ class _AlertViewState extends State<AlertView> {
                 margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
 
                 child:  Text(
-                  "￥${widget.entity.data.setmeal[index].configjson[i][1]}",
+                  "￥${widget.entity.data.setmeal[index].configjson[i].price}",
                   style: TextStyle(
                       fontSize: AppConfig.logic_width(
                         25,

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:shop/root/home/model/shop_bean_entity.dart';
+import 'package:shop/root/home/model/shop_detail_entity.dart';
 import 'package:shop/utils/AppConfig.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 class DetailPage extends StatefulWidget {
-  ShopBeanEntity  entity;
+  ShopDetailEntity  entity;
 
   DetailPage(this.entity);
 
@@ -179,8 +179,10 @@ for(int i =0;i<widget.entity.data.setmeal.length;i++){
 //                                      ],
                                     ),
                                     Container(
+                                      padding: EdgeInsets.all(AppConfig.logic_width(10)),
+
                                       alignment: Alignment.centerLeft,
-                                      child: Text("无需预约\n游戏币兑换完长期有效\n有效期超长 "),
+                                      child: HtmlWidget( widget.entity.data.rightsandinterestscontent,),
                                     ),
                                     Container(
 //                        margin: EdgeInsets.only(left: AppConfig.logic_width(20)),
@@ -312,19 +314,19 @@ for(int i =0;i<widget.entity.data.setmeal.length;i++){
             ),
 
             ///权益说明
-            new SliverList(
-              delegate: new SliverChildListDelegate([
-                new Container(
-
-                  child:HtmlWidget(
-              widget.entity.data.rightsandinterestscontent,
-              ),
-//                  child: Text(
-//                      "权益说明\n· 套餐内容：1大1小门票+儿童套餐畅玩不限时（周一至周五可用，节假日不可用）\n· 儿童餐：主食（小馄饨/面条2选1）+卡通包2个+水果1份+南瓜粥1杯\n· 因门店预约火爆，为避免约满状态，请提前一天预约· 每个用户限购2份\n· 额外成人：额外的大人入园需另付50元/人\n· 适用儿童：1-8岁儿童，餐食与游玩票需在游玩当天使用完毕\n· 请勿携带外食进入餐厅，宝宝辅食类除外\n· 本套餐不与店内其他优惠活动同享\n· 3岁以下儿童需穿纸尿裤入场游玩\n· 为保证游乐区环境安全整洁，大人孩子都需要脱鞋穿袜哦，如果忘穿了亦可现场购买\n· 如遇现场客流高峰期，可能需要等位\n· 如部分菜品因时令等不可抗因素导致无法提供，商家会用等价菜品代替，具体请与商家协商\n· 价值仅供参考，实际价格以门店菜单为准"),
-                  margin: EdgeInsets.all(AppConfig.logic_width(20)),
-                ),
-              ]),
-            ),
+//            new SliverList(
+//              delegate: new SliverChildListDelegate([
+//                new Container(
+//
+//                  child:HtmlWidget(
+//              widget.entity.data.rightsandinterestscontent,
+//              ),
+////                  child: Text(
+////                      "权益说明\n· 套餐内容：1大1小门票+儿童套餐畅玩不限时（周一至周五可用，节假日不可用）\n· 儿童餐：主食（小馄饨/面条2选1）+卡通包2个+水果1份+南瓜粥1杯\n· 因门店预约火爆，为避免约满状态，请提前一天预约· 每个用户限购2份\n· 额外成人：额外的大人入园需另付50元/人\n· 适用儿童：1-8岁儿童，餐食与游玩票需在游玩当天使用完毕\n· 请勿携带外食进入餐厅，宝宝辅食类除外\n· 本套餐不与店内其他优惠活动同享\n· 3岁以下儿童需穿纸尿裤入场游玩\n· 为保证游乐区环境安全整洁，大人孩子都需要脱鞋穿袜哦，如果忘穿了亦可现场购买\n· 如遇现场客流高峰期，可能需要等位\n· 如部分菜品因时令等不可抗因素导致无法提供，商家会用等价菜品代替，具体请与商家协商\n· 价值仅供参考，实际价格以门店菜单为准"),
+//                  margin: EdgeInsets.all(AppConfig.logic_width(20)),
+//                ),
+//              ]),
+//            ),
 
             ///适用门店
             new SliverList(
@@ -691,9 +693,11 @@ for(int i =0;i<widget.entity.data.setmeal.length;i++){
             new SliverList(
               delegate: new SliverChildListDelegate([
                 new Container(
+
                   child: HtmlWidget(
                     widget.entity.data.content,
                   ),
+                  padding: EdgeInsets.all(AppConfig.logic_width(10)),
                 ),
               ]),
             ),
@@ -751,6 +755,8 @@ for(int i =0;i<widget.entity.data.setmeal.length;i++){
             new SliverList(
               delegate: new SliverChildListDelegate([
                 new Container(
+                  padding: EdgeInsets.all(AppConfig.logic_width(10)),
+
                   child: HtmlWidget(
                     widget.entity.data.mianzecontent,
                   ),
@@ -938,7 +944,7 @@ for(int i =0;i<widget.entity.data.setmeal.length;i++){
                     child:
                     Row(children: [
                       Text(
-                        widget.entity.data.setmeal[index].configjson[i][0],
+                        widget.entity.data.setmeal[index].configjson[i].name,
                         style: TextStyle(
                             fontSize: AppConfig.logic_fontSize(
                               25,
@@ -950,7 +956,7 @@ for(int i =0;i<widget.entity.data.setmeal.length;i++){
                         margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
 
                         child:  Text(
-                         "￥${widget.entity.data.setmeal[index].configjson[i][1]}",
+                         "￥${widget.entity.data.setmeal[index].configjson[i].price}",
                           style: TextStyle(
                               fontSize: AppConfig.logic_width(
                                 25,

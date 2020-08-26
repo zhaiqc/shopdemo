@@ -7,7 +7,7 @@ import 'package:shop/utils/view_model/BaseViewModel.dart';
 
 import 'model/banner_bean_entity.dart';
 import 'model/category_bean_entity.dart';
-import 'model/shop_bean_entity.dart';
+import 'model/shop_detail_entity.dart';
 
 class HomeViewModel extends BaseViewModel {
 
@@ -54,12 +54,12 @@ class HomeViewModel extends BaseViewModel {
     return Future(()=>entity);
 
   }
-  Future<ShopBeanEntity> getShop({int shoplist_id})async{
+  Future<ShopDetailEntity> getShop({int shoplist_id})async{
     print("shoplist_id ${shoplist_id}");
-    FormData formData = new FormData.fromMap({"shoplist_id": 1});
+    FormData formData = new FormData.fromMap({"shoplist_id": shoplist_id});
     Response  res=await  HttpUtils().sendData(url: "index/getShop",data: formData);
     print("getShop ${res}");
-    ShopBeanEntity entity = ShopBeanEntity().fromJson(res.data);
+    ShopDetailEntity entity = ShopDetailEntity().fromJson(res.data);
     return Future(()=>entity);
 
   }
