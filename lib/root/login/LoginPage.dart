@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop/root/login/view/LoginView.dart';
 import 'package:shop/utils/AppConfig.dart';
 import 'package:shop/utils/Dimens.dart';
 import 'package:shop/utils/text_field.dart';
@@ -9,7 +10,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> implements LoginView {
   final FocusNode _phoneFN = FocusNode();
   final FocusNode _codeFN = FocusNode();
 
@@ -70,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
 
         getVCode: (){
 //          LogUtils.show(filter: "phonenum",msg: phoneCode+_phoneController.text);
-//          _viewModel.sendSms(phoneNum: phoneCode+_phoneController.text );
+          _viewModel.sendSms(phoneNum:_phoneController.text );
 ////                    timerController.startTimer();
 //          showDialog(context:context,builder: (context){
 //            con =context;
