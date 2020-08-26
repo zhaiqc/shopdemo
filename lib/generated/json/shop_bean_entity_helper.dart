@@ -1,6 +1,6 @@
-import 'package:shop/root/home/model/shop_detail_bean_entity.dart';
+import 'package:shop/root/home/model/shop_bean_entity.dart';
 
-shopDetailBeanEntityFromJson(ShopDetailBeanEntity data, Map<String, dynamic> json) {
+shopBeanEntityFromJson(ShopBeanEntity data, Map<String, dynamic> json) {
 	if (json['code'] != null) {
 		data.code = json['code']?.toInt();
 	}
@@ -11,12 +11,12 @@ shopDetailBeanEntityFromJson(ShopDetailBeanEntity data, Map<String, dynamic> jso
 		data.time = json['time']?.toString();
 	}
 	if (json['data'] != null) {
-		data.data = new ShopDetailBeanData().fromJson(json['data']);
+		data.data = new ShopBeanData().fromJson(json['data']);
 	}
 	return data;
 }
 
-Map<String, dynamic> shopDetailBeanEntityToJson(ShopDetailBeanEntity entity) {
+Map<String, dynamic> shopBeanEntityToJson(ShopBeanEntity entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['code'] = entity.code;
 	data['msg'] = entity.msg;
@@ -27,7 +27,7 @@ Map<String, dynamic> shopDetailBeanEntityToJson(ShopDetailBeanEntity entity) {
 	return data;
 }
 
-shopDetailBeanDataFromJson(ShopDetailBeanData data, Map<String, dynamic> json) {
+shopBeanDataFromJson(ShopBeanData data, Map<String, dynamic> json) {
 	if (json['id'] != null) {
 		data.id = json['id']?.toInt();
 	}
@@ -95,19 +95,19 @@ shopDetailBeanDataFromJson(ShopDetailBeanData data, Map<String, dynamic> json) {
 		data.mianzecontent = json['mianzecontent']?.toString();
 	}
 	if (json['setmeal'] != null) {
-		data.setmeal = new List<ShopDetailBeanDataSetmeal>();
+		data.setmeal = new List<ShopBeanDataSetmeal>();
 		(json['setmeal'] as List).forEach((v) {
-			data.setmeal.add(new ShopDetailBeanDataSetmeal().fromJson(v));
+			data.setmeal.add(new ShopBeanDataSetmeal().fromJson(v));
 		});
 	}
 	if (json['manystoretaps'] != null) {
-		data.manystoretaps = new List<ShopDetailBeanDataManystoretap>();
+		data.manystoretaps = new List<ShopBeanDataManystoretap>();
 		(json['manystoretaps'] as List).forEach((v) {
-			data.manystoretaps.add(new ShopDetailBeanDataManystoretap().fromJson(v));
+			data.manystoretaps.add(new ShopBeanDataManystoretap().fromJson(v));
 		});
 	}
 	if (json['manystore'] != null) {
-		data.manystore = new ShopDetailBeanDataManystore().fromJson(json['manystore']);
+		data.manystore = new ShopBeanDataManystore().fromJson(json['manystore']);
 	}
 	if (json['status_text'] != null) {
 		data.statusText = json['status_text']?.toString();
@@ -118,7 +118,7 @@ shopDetailBeanDataFromJson(ShopDetailBeanData data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> shopDetailBeanDataToJson(ShopDetailBeanData entity) {
+Map<String, dynamic> shopBeanDataToJson(ShopBeanData entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['id'] = entity.id;
 	data['title'] = entity.title;
@@ -156,7 +156,7 @@ Map<String, dynamic> shopDetailBeanDataToJson(ShopDetailBeanData entity) {
 	return data;
 }
 
-shopDetailBeanDataSetmealFromJson(ShopDetailBeanDataSetmeal data, Map<String, dynamic> json) {
+shopBeanDataSetmealFromJson(ShopBeanDataSetmeal data, Map<String, dynamic> json) {
 	if (json['id'] != null) {
 		data.id = json['id']?.toInt();
 	}
@@ -164,7 +164,11 @@ shopDetailBeanDataSetmealFromJson(ShopDetailBeanDataSetmeal data, Map<String, dy
 		data.name = json['name']?.toString();
 	}
 	if (json['configjson'] != null) {
-		data.configjson = json['configjson']?.toString();
+		data.configjson = new List<List>();
+		(json['configjson'] as List).forEach((v) {
+
+			data.configjson.add(v);
+		});
 	}
 	if (json['status_text'] != null) {
 		data.statusText = json['status_text']?.toString();
@@ -172,16 +176,18 @@ shopDetailBeanDataSetmealFromJson(ShopDetailBeanDataSetmeal data, Map<String, dy
 	return data;
 }
 
-Map<String, dynamic> shopDetailBeanDataSetmealToJson(ShopDetailBeanDataSetmeal entity) {
+Map<String, dynamic> shopBeanDataSetmealToJson(ShopBeanDataSetmeal entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['id'] = entity.id;
 	data['name'] = entity.name;
-	data['configjson'] = entity.configjson;
+	if (entity.configjson != null) {
+		data['configjson'] =  entity.configjson.map((v) => v.toList());
+	}
 	data['status_text'] = entity.statusText;
 	return data;
 }
 
-shopDetailBeanDataManystoretapFromJson(ShopDetailBeanDataManystoretap data, Map<String, dynamic> json) {
+shopBeanDataManystoretapFromJson(ShopBeanDataManystoretap data, Map<String, dynamic> json) {
 	if (json['id'] != null) {
 		data.id = json['id']?.toInt();
 	}
@@ -191,14 +197,14 @@ shopDetailBeanDataManystoretapFromJson(ShopDetailBeanDataManystoretap data, Map<
 	return data;
 }
 
-Map<String, dynamic> shopDetailBeanDataManystoretapToJson(ShopDetailBeanDataManystoretap entity) {
+Map<String, dynamic> shopBeanDataManystoretapToJson(ShopBeanDataManystoretap entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['id'] = entity.id;
 	data['name'] = entity.name;
 	return data;
 }
 
-shopDetailBeanDataManystoreFromJson(ShopDetailBeanDataManystore data, Map<String, dynamic> json) {
+shopBeanDataManystoreFromJson(ShopBeanDataManystore data, Map<String, dynamic> json) {
 	if (json['id'] != null) {
 		data.id = json['id']?.toInt();
 	}
@@ -229,7 +235,7 @@ shopDetailBeanDataManystoreFromJson(ShopDetailBeanDataManystore data, Map<String
 	return data;
 }
 
-Map<String, dynamic> shopDetailBeanDataManystoreToJson(ShopDetailBeanDataManystore entity) {
+Map<String, dynamic> shopBeanDataManystoreToJson(ShopBeanDataManystore entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['id'] = entity.id;
 	data['name'] = entity.name;

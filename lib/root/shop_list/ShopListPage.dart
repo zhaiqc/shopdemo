@@ -1,18 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:shop/root/home/HomeViewModel.dart';
-import 'package:shop/root/home/model/shop_detail_bean_entity.dart';
+import 'package:shop/root/home/model/shop_bean_entity.dart';
 import 'package:shop/root/home/shopx_entity.dart';
 import 'package:shop/root/shop_list/view/ShopListView.dart';
 import 'package:shop/root/shop_list/view_model/ShopListViewModel.dart';
 import 'package:shop/utils/AppConfig.dart';
-import 'package:shop/utils/provider/ViewModelProvider.dart';
-
 import '../../utils/AlertView.dart';
-import '../../utils/AppConfig.dart';
-import '../../utils/AppConfig.dart';
-import '../../utils/AppConfig.dart';
 import '../../utils/AppConfig.dart';
 import '../detail/DetailPage.dart';
 
@@ -296,7 +290,7 @@ class _ShopListPageState extends State<ShopListPage> implements ShopListView {
           },
         ));
   }
-  void show(ShopDetailBeanEntity entity){
+  void show(ShopBeanEntity entity){
     showDialog(
       context: context,
       barrierDismissible: true,

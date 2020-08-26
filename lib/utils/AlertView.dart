@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/root/home/model/shop_detail_bean_entity.dart';
-
+import 'package:shop/root/home/model/shop_bean_entity.dart';
 import 'AppConfig.dart';
 
 class AlertView extends StatefulWidget {
  var onTap;
- ShopDetailBeanEntity entity;
+ ShopBeanEntity entity;
   AlertView({
     Key key,
     this.onTap,
@@ -24,15 +23,13 @@ class AlertView extends StatefulWidget {
 
 class _AlertViewState extends State<AlertView> {
   bool isBig;  Map<String, dynamic> map;
-List cai =new List();
   @override
   void initState() {
+    widget.entity.data.setmeal.forEach((element) {
+      print(element.toJson());
 
-     map = json.decode(widget.entity.data.setmeal[0].configjson);
-     map.forEach((key, value) {
+    });
 
-       cai.add({"key":key,"value":value});
-     });
     // TODO: implement initState
     super.initState();
   }
@@ -278,14 +275,20 @@ List cai =new List();
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+          height: AppConfig.logic_height(100)*  widget.entity.data.setmeal[index].configjson.length,
 
           width: double.infinity,
 //                        color: Colors.blue,
-          child:ListView.builder(itemBuilder: ((context,index){
-            return Container(child:
+          child:ListView.builder(
+            itemCount:  widget.entity.data.setmeal[index].configjson.length,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: ((context,i){
+            return Container(
+              height: AppConfig.logic_height(100),
+              child:
             Row(children: [
               Text(
-                "${cai[index].key}",
+                widget.entity.data.setmeal[index].configjson[i][0],
                 style: TextStyle(
                     fontSize: AppConfig.logic_fontSize(
                       25,
@@ -297,8 +300,7 @@ List cai =new List();
                 margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
 
                 child:  Text(
-//                  "￥${cai.values}",
-                "",
+                  "￥${widget.entity.data.setmeal[index].configjson[i][1]}",
                   style: TextStyle(
                       fontSize: AppConfig.logic_width(
                         25,

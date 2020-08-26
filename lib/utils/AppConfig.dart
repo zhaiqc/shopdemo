@@ -169,13 +169,13 @@ class AppConfig{
           new Expanded(child: new Container()),
           new Container(
             alignment: Alignment.center,
-            child: new SpinKitWave(color: Colors.white,size: 50.0,),
+            child: new SpinKitWave(color: Colors.red,size: 50.0,),
           ),
           new Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 5.0),
             child: Shimmer.fromColors(
-                child: new Text("正在加载中~"),
+                child: new Text("正在加载中~",style: TextStyle(color: Colors.red),),
                 baseColor: Colors.white30,
                 highlightColor: Colors.white
             ),

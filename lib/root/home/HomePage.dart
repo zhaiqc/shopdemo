@@ -4,7 +4,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:shop/root/detail/DetailPage.dart';
 import 'package:shop/root/home/HomeViewModel.dart';
-import 'package:shop/root/home/shop_entity.dart';
 import 'package:shop/root/home/shopx_entity.dart';
 import 'package:shop/utils/AlertView.dart';
 import 'package:shop/utils/AppConfig.dart';
@@ -20,7 +19,7 @@ import 'package:flutter_2d_amap/flutter_2d_amap.dart';
 import '../shop_list/ShopListPage.dart';
 import 'model/banner_bean_entity.dart';
 import 'model/category_bean_entity.dart';
-import 'model/shop_detail_bean_entity.dart';
+import 'model/shop_bean_entity.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -656,7 +655,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       onTap: () {
-        _viewModel.getShop(shoplist_id: data.id).then((value) =>show(value)
+        _viewModel.getShop(shoplist_id: data.id).then((value)=>show(value)
         )
        ;
 //          showDialog(
@@ -668,7 +667,8 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-  void show(ShopDetailBeanEntity entity){
+  void show(ShopBeanEntity entity){
+    print(entity.data.originalPrice);
     showDialog(
       context: context,
       barrierDismissible: true,

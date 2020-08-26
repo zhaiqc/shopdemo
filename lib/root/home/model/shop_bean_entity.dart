@@ -1,14 +1,14 @@
 import 'package:shop/generated/json/base/json_convert_content.dart';
 import 'package:shop/generated/json/base/json_filed.dart';
 
-class ShopDetailBeanEntity with JsonConvert<ShopDetailBeanEntity> {
+class ShopBeanEntity with JsonConvert<ShopBeanEntity> {
 	int code;
 	String msg;
 	String time;
-	ShopDetailBeanData data;
+	ShopBeanData data;
 }
 
-class ShopDetailBeanData with JsonConvert<ShopDetailBeanData> {
+class ShopBeanData with JsonConvert<ShopBeanData> {
 	int id;
 	String title;
 	String subtitle;
@@ -39,29 +39,29 @@ class ShopDetailBeanData with JsonConvert<ShopDetailBeanData> {
 	String content;
 	String rightsandinterestscontent;
 	String mianzecontent;
-	List<ShopDetailBeanDataSetmeal> setmeal;
-	List<ShopDetailBeanDataManystoretap> manystoretaps;
-	ShopDetailBeanDataManystore manystore;
+	List<ShopBeanDataSetmeal> setmeal;
+	List<ShopBeanDataManystoretap> manystoretaps;
+	ShopBeanDataManystore manystore;
 	@JSONField(name: "status_text")
 	String statusText;
 	@JSONField(name: "spell_status_text")
 	String spellStatusText;
 }
 
-class ShopDetailBeanDataSetmeal with JsonConvert<ShopDetailBeanDataSetmeal> {
+class ShopBeanDataSetmeal with JsonConvert<ShopBeanDataSetmeal> {
 	int id;
 	String name;
-	String configjson;
+	List<List> configjson;
 	@JSONField(name: "status_text")
 	String statusText;
 }
 
-class ShopDetailBeanDataManystoretap with JsonConvert<ShopDetailBeanDataManystoretap> {
+class ShopBeanDataManystoretap with JsonConvert<ShopBeanDataManystoretap> {
 	int id;
 	String name;
 }
 
-class ShopDetailBeanDataManystore with JsonConvert<ShopDetailBeanDataManystore> {
+class ShopBeanDataManystore with JsonConvert<ShopBeanDataManystore> {
 	int id;
 	String name;
 	String logo;

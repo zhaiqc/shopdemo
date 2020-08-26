@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:shop/root/home/model/shop_detail_bean_entity.dart';
+import 'package:shop/root/home/model/shop_bean_entity.dart';
 import 'package:shop/utils/AppConfig.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-
 class DetailPage extends StatefulWidget {
-  ShopDetailBeanEntity  entity;
+  ShopBeanEntity  entity;
 
   DetailPage(this.entity);
 
@@ -15,6 +14,7 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  int height=0;
   // String str ='"<font color="#888888">交易全程在闲鱼，</font><strong><font color="#F54444">你敢买，我敢赔！</font></strong><font color="#888888">若遇欺诈造成</font><strong><font color="#F54444">钱货两失，可获赔</font></strong><strong><font color="#F54444">最高5000元</font></strong>"';
   var kHtml = '''<h1>Heading 1</h1>
 <h2>Heading 2</h2>
@@ -26,6 +26,11 @@ class _DetailPageState extends State<DetailPage> {
 List<Widget> tags =new List();
   @override
   void initState() {
+    height=widget.entity.data.setmeal.length;
+for(int i =0;i<widget.entity.data.setmeal.length;i++){
+   height=height+ widget.entity.data.setmeal[i].configjson.length;
+}
+
     widget.entity.data.manystoretaps.forEach((element) {
         tags.add( Container(
           alignment: Alignment.center,
@@ -244,25 +249,25 @@ List<Widget> tags =new List();
                         ),
                       ),
                       new Expanded(child: new Container()),
-                      new Container(
-                        child: new GestureDetector(
-                          onTap: () {
-                            ///分类点击事件
-                          },
-                          child: new Row(
-                            children: <Widget>[
-                              new Text("查看全部",
-                                  style: TextStyle(
-                                      fontSize: AppConfig.logic_fontSize(20))),
-                              new Icon(
-                                Icons.chevron_right,
-                                size: AppConfig.font_bigSize,
-//                          color: AppConfig.widgetColor,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+//                      new Container(
+//                        child: new GestureDetector(
+//                          onTap: () {
+//                            ///分类点击事件
+//                          },
+//                          child: new Row(
+//                            children: <Widget>[
+//                              new Text("查看全部",
+//                                  style: TextStyle(
+//                                      fontSize: AppConfig.logic_fontSize(20))),
+//                              new Icon(
+//                                Icons.chevron_right,
+//                                size: AppConfig.font_bigSize,
+////                          color: AppConfig.widgetColor,
+//                              ),
+//                            ],
+//                          ),
+//                        ),
+//                      ),
                     ],
                   ),
 
@@ -284,8 +289,7 @@ List<Widget> tags =new List();
                                 child: Column(
                                   children: [
                                     Container(
-
-                                        height: AppConfig.logic_height(100) * ( widget.entity.data.setmeal.length),
+                                        height: AppConfig.logic_height(100) *height,
                                         alignment: Alignment.centerLeft,
                                         child: ListView.builder(
                                             physics:
@@ -362,7 +366,7 @@ List<Widget> tags =new List();
                               EdgeInsets.only(left: AppConfig.logic_width(20)),
 //                          color: Colors.red,
                           child: Image.network(
-                            "http://static.caibeike.com/i/cf50ad01ca256d86313387315247a484-AYRfIy-bebgwkeehj2@!c300",
+                          widget.entity.data.manystore.image,
                             height: AppConfig.logic_width(100),
                             width: AppConfig.logic_width(100),
                           ),
@@ -377,13 +381,13 @@ List<Widget> tags =new List();
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "金宝贝探索小镇",
+                                  widget.entity.data.manystore.name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "常规乐园|儿童乐园",
+                                 widget.entity.data.manystore.address,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: AppConfig.logic_fontSize(20)),
@@ -411,15 +415,15 @@ List<Widget> tags =new List();
               ]),
             ),
 
-            new SliverList(
-              delegate: new SliverChildListDelegate([
-                new Container(
-                  child: HtmlWidget(
-                    kHtml,
-                  ),
-                ),
-              ]),
-            ),
+//            new SliverList(
+//              delegate: new SliverChildListDelegate([
+//                new Container(
+//                  child: HtmlWidget(
+//                    kHtml,
+//                  ),
+//                ),
+//              ]),
+//            ),
 
             ///体验shi
             new SliverList(
@@ -748,7 +752,7 @@ List<Widget> tags =new List();
               delegate: new SliverChildListDelegate([
                 new Container(
                   child: HtmlWidget(
-                    kHtml,
+                    widget.entity.data.mianzecontent,
                   ),
                 ),
               ]),
@@ -907,12 +911,11 @@ List<Widget> tags =new List();
     return Column(
       children: [
         Container(
-//          margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
 
           width: double.infinity,
-//                        color: Colors.blue,
           child: Text(
-            widget.entity.data.setmeal[index].statusText,
+            widget.entity.data.setmeal[index].name,
             style: TextStyle(
                 fontSize: AppConfig.logic_width(
                   30,
@@ -921,34 +924,45 @@ List<Widget> tags =new List();
           ),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+            margin: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+            height: AppConfig.logic_height(100)*  widget.entity.data.setmeal[index].configjson.length,
 
-          width: double.infinity,
+            width: double.infinity,
 //                        color: Colors.blue,
-          child: Row(
-            children: [
-              Text(
-                widget.entity.data.setmeal[index].name,
-                style: TextStyle(
-                    fontSize: AppConfig.logic_fontSize(
-                      25,
-                    ),
-                    color: Colors.black),
-              ),
-              Expanded(child: Container()),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                child: Text(
-                  "￥${widget.entity.data.setmeal[index].configjson}",
-                  style: TextStyle(
-                      fontSize: AppConfig.logic_width(
-                        25,
+            child:ListView.builder(
+                itemCount:  widget.entity.data.setmeal[index].configjson.length,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: ((context,i){
+                  return Container(
+                    height: AppConfig.logic_height(100),
+                    child:
+                    Row(children: [
+                      Text(
+                        widget.entity.data.setmeal[index].configjson[i][0],
+                        style: TextStyle(
+                            fontSize: AppConfig.logic_fontSize(
+                              25,
+                            ),
+                            color: Colors.black),
                       ),
-                      color: Colors.black),
-                ),
-              )
-            ],
-          ),
+                      Expanded(child: Container()),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+
+                        child:  Text(
+                         "￥${widget.entity.data.setmeal[index].configjson[i][1]}",
+                          style: TextStyle(
+                              fontSize: AppConfig.logic_width(
+                                25,
+                              ),
+                              color: Colors.black),
+                        ) ,)
+
+                    ],)
+                    ,);
+                }))
+
+
         ),
       ],
     );

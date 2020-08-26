@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shop/root/home/shop_entity.dart';
 import 'package:shop/root/home/shopx_entity.dart';
 import 'package:shop/utils/HttpUtils.dart';
 import 'package:shop/utils/view_model/BaseViewModel.dart';
 
 import 'model/banner_bean_entity.dart';
 import 'model/category_bean_entity.dart';
-import 'model/shop_detail_bean_entity.dart';
+import 'model/shop_bean_entity.dart';
 
 class HomeViewModel extends BaseViewModel {
 
@@ -55,12 +54,12 @@ class HomeViewModel extends BaseViewModel {
     return Future(()=>entity);
 
   }
-  Future<ShopDetailBeanEntity> getShop({int shoplist_id})async{
+  Future<ShopBeanEntity> getShop({int shoplist_id})async{
     print("shoplist_id ${shoplist_id}");
     FormData formData = new FormData.fromMap({"shoplist_id": 1});
     Response  res=await  HttpUtils().sendData(url: "index/getShop",data: formData);
     print("getShop ${res}");
-    ShopDetailBeanEntity entity = ShopDetailBeanEntity().fromJson(res.data);
+    ShopBeanEntity entity = ShopBeanEntity().fromJson(res.data);
     return Future(()=>entity);
 
   }
